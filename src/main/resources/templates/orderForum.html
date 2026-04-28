@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order Forum</title>
+    <link rel="stylesheet" th:href="@{/css/orderForum.css}" />
+</head>
+<body>
+
+    <form method="POST" th:action="@{/orders}" th:object="${tacoOrder}">
+    <a href="/design">Noch einen Taco machen!</a>
+        <div th:each="taco : ${tacoOrder.tacos}">
+            <p th:text="${taco.name}">Taco Names</p>
+            <div th:each="ingredient : ${taco.ingredients}">
+                <span th:text="${ingredient.name}">Ingredient Name</span>
+            </div>
+        </div></br>
+
+        <div>
+            <label for="deliveryName">Liefer Name</label>
+            <input type="text" th:field="*{deliveryName}" placeholder="Name"/>
+            </br>
+            <label for="deliveryStreet">Liefer Straße</label>
+            <input type="text" th:field="*{deliveryStreet}" placeholder="Straße"/>
+            </br>
+            <label for="deliveryCity">Liefer Stadt</label>
+            <input type="text" th:field="*{deliveryCity}" placeholder="Stadt"/>
+            </br>
+            <label for="deliveryState">Liefer Staat</label>
+            <input type="text" th:field="*{deliveryState}" placeholder="State"/>
+            </br>
+            <label for="deliveryZip">Liefer Pzl</label>
+            <input type="text" th:field="*{deliveryZip}" placeholder="Postleitzahl"/>
+            </br>
+            <label for="ccNumber">Kartennummer</label>
+            <input type="text" th:field="*{ccNumber}" placeholder="Kartennummer"/>
+            <span class="validationError" th:if="${#fields.hasErrors('ccNumber')}" th:errors="*{ccNumber}">Kartennummer Fehler</span>
+            </br>
+            <label for="ccExpiration">Ablaufdatum</label>
+            <input type="text" th:field="*{ccExpiration}" placeholder="Karten Ablaufsdatum"/>
+            <span class="validationError" th:if = "${#fields.hasErrors('ccExpiration')}" th:errors="*{ccExpiration}">Ablaufdatum Fehler</span>
+            </br>
+            <label for="ccCCV">Kartem CCV</label>
+            <input type="text" th:field="*{ccCVV}" placeholder="Karten CVV"/>
+            <span class="validationError" th:if = "${#fields.hasErrors('ccCVV')}" th:errors="*{ccCVV}">CVV Fehler</span>
+            </br>
+            <button type="submit">Bestellen!</button>
+        </div>
+
+    </form>
+
+
+
+</body>
