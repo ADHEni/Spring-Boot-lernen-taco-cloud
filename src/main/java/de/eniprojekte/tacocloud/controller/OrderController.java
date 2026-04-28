@@ -11,6 +11,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
+import java.util.Date;
+
 @Controller
 @Slf4j
 @RequestMapping("/orders")
@@ -42,7 +44,7 @@ public class OrderController {
             return "orderForum";
 
         }
-
+        tacoOrder.setOrderPlacedAt(new Date());
         orderRepository.save(tacoOrder);
         log.info("Order submitted: {}", tacoOrder);
         sessionStatus.setComplete();

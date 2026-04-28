@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS Taco_Order(
     delivery_city VARCHAR(255) NOT NULL,
     delivery_state VARCHAR(255) NOT NULL,
     delivery_zip VARCHAR(255) NOT NULL,
-    placed_at TIMESTAMP NOT NULL,
+    order_placed_at TIMESTAMP NOT NULL,
     credit_card_number VARCHAR(16) NOT NULL,
     credit_card_expiration VARCHAR(5) NOT NULL,
     credit_card_cvv CHAR(3) NOT NULL

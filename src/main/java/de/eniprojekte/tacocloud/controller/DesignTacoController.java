@@ -1,8 +1,7 @@
 package de.eniprojekte.tacocloud.controller;
 
-import de.eniprojekte.tacocloud.Repository.JdbcIngredientRepository;
 import de.eniprojekte.tacocloud.data.Ingredient;
-import de.eniprojekte.tacocloud.data.Ingredient.ingredientType;
+import de.eniprojekte.tacocloud.data.Ingredient.Type;
 import de.eniprojekte.tacocloud.data.Taco;
 import de.eniprojekte.tacocloud.data.TacoOrder;
 import de.eniprojekte.tacocloud.interfaces.IngredientRepository;
@@ -42,9 +41,9 @@ public class DesignTacoController {
 
         java.lang.Iterable<Ingredient> ingredients = ingredientRepo.findAll();
 
-        ingredientType[] types = Ingredient.ingredientType.values();
+        Type[] types = Ingredient.Type.values();
 
-        for(ingredientType type : types) {
+        for(Type type : types) {
 
             model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients,type));
 
@@ -87,7 +86,7 @@ public class DesignTacoController {
         return "redirect:/orders/current";
     }
 
-    private Iterable<Ingredient> filterByType(Iterable<Ingredient> ingredientList, ingredientType type) {
+    private Iterable<Ingredient> filterByType(Iterable<Ingredient> ingredientList, Type type) {
 
         List<Ingredient> result = new ArrayList<>();
 

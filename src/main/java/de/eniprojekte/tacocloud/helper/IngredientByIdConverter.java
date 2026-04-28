@@ -1,6 +1,6 @@
 package de.eniprojekte.tacocloud.helper;
 
-import de.eniprojekte.tacocloud.Repository.JdbcIngredientRepository;
+
 import de.eniprojekte.tacocloud.data.Ingredient;
 import de.eniprojekte.tacocloud.interfaces.IngredientRepository;
 import org.jspecify.annotations.Nullable;
