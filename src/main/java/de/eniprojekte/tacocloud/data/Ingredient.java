@@ -1,28 +1,24 @@
 package de.eniprojekte.tacocloud.data;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.domain.Persistable;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 
 @Data
-@Table("INGREDIENT")
-public class Ingredient implements Persistable<String> {
+@Document(collation = "ingredients")
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+public class Ingredient{
 
     @Id
-    @Column("ID")
     private final String id;
-    @Column("INGREDIENT_NAME")
     private final String name;
-    @Column("INGREDIENT_TYPE")
     private final Type type;
-
-    @Override
-    public boolean isNew() {
-        return true;
-    }
-
     public enum Type{
 
         WRAP,
