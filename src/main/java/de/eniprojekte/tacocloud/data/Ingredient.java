@@ -2,12 +2,13 @@ package de.eniprojekte.tacocloud.data;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Data
 @Table("INGREDIENT")
-public class Ingredient {
+public class Ingredient implements Persistable<String> {
 
     @Id
     @Column("ID")
@@ -16,6 +17,11 @@ public class Ingredient {
     private final String name;
     @Column("INGREDIENT_TYPE")
     private final Type type;
+
+    @Override
+    public boolean isNew() {
+        return true;
+    }
 
     public enum Type{
 

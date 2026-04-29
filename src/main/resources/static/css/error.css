@@ -1,0 +1,35 @@
+.errorbox {
+
+    background: gray;
+    font-family: Arial sans-serif;
+    color: white;
+    outline: black thin;
+    text-align: center;
+    width: 500px;
+    height: 100px;
+
+}
+
+.errorbutton{
+
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    background: white;
+    outline: black 51px;
+    color: black;
+    font-family: Arial sans-serif;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.containerbox{
+
+
+    flex-direction: column;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
