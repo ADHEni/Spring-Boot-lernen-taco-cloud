@@ -1,14 +1,18 @@
 package de.eniprojekte.tacocloud.data;
 
-import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.domain.Persistable;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.*;
+
+
 import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+
 
 @Data
-@Table("INGREDIENT")
-public class Ingredient implements Persistable<String> {
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED,force = true)
+public class Ingredient {
 
     @Id
     @Column("ID")
@@ -17,11 +21,6 @@ public class Ingredient implements Persistable<String> {
     private final String name;
     @Column("INGREDIENT_TYPE")
     private final Type type;
-
-    @Override
-    public boolean isNew() {
-        return true;
-    }
 
     public enum Type{
 

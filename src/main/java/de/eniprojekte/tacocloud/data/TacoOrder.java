@@ -1,12 +1,12 @@
 package de.eniprojekte.tacocloud.data;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
@@ -18,12 +18,15 @@ import java.util.List;
 
 @Data
 @Table("TACO_ORDER")
+@Entity
 public class TacoOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private Date orderPlacedAt;
 
     @NotEmpty
@@ -61,7 +64,7 @@ public class TacoOrder implements Serializable {
     @Column("CREDIT_CARD_CVV")
     private String ccCVV;
 
-    @MappedCollection(idColumn = "TACO_ORDER_ID", keyColumn = "TACO_ORDER_KEY")
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Taco> tacos = new ArrayList<>();
 
     public void addTaco(Taco taco){

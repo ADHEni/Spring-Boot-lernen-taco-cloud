@@ -1,21 +1,24 @@
 package de.eniprojekte.tacocloud.data;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
 @Table("TACO")
+@Entity
 public class Taco {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column("CREATED_AT")
     private Date createdAt = new Date();
@@ -27,10 +30,14 @@ public class Taco {
 
     @NotNull
     @Size(min = 1, message = "Es muss mindestens ein Inhalt gewählt werden!")
-    @MappedCollection(idColumn = "TACO_ID", keyColumn = "TACO_KEY")
-    private List<Ingredient_Ref> ingredients;
+    @ManyToMany()
+    private List<Ingredient> ingredients = new ArrayList<>();
 
+    public void addIngredient(Ingredient ingredient) {
 
+        this.ingredients.add(ingredient);
+
+    }
 
 
 
