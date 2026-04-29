@@ -1,27 +1,26 @@
 package de.eniprojekte.tacocloud.data;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.domain.Persistable;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import lombok.NoArgsConstructor;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
+
 
 @Data
-@Table("INGREDIENT")
-public class Ingredient implements Persistable<String> {
+@AllArgsConstructor
+@NoArgsConstructor(access= AccessLevel.PRIVATE, force=true)
+@Table("ingredients")
+public class Ingredient{
 
-    @Id
-    @Column("ID")
+    @PrimaryKey
     private final String id;
-    @Column("INGREDIENT_NAME")
+
     private final String name;
-    @Column("INGREDIENT_TYPE")
+
     private final Type type;
 
-    @Override
-    public boolean isNew() {
-        return true;
-    }
 
     public enum Type{
 
