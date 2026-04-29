@@ -4,28 +4,26 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.MappedCollection;
-import org.springframework.data.relational.core.mapping.Table;
+
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
-@Table("TACO")
+@Table(name = "TACO")
 @Entity
 public class Taco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column("CREATED_AT")
+    @Column(name = "CREATED_AT")
     private Date createdAt = new Date();
 
     @NotNull
     @Size(min = 5, max = 50, message = "Mindest 5 Buchstaben")
-    @Column("TACO_NAME")
+    @Column(name = "TACO_NAME")
     private String name;
 
     @NotNull
