@@ -46,7 +46,9 @@ public class SecurityConfig {
                         .requestMatchers("/","/**","/h2-console/login.do")
                         .access(new WebExpressionAuthorizationManager("permitAll()"))
                         ).csrf(csrf -> csrf
-                .ignoringRequestMatchers(PathRequest.toH2Console())).headers(headers -> headers.frameOptions(frame -> frame.sameOrigin())).formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/design").permitAll())
+                .ignoringRequestMatchers(PathRequest.toH2Console())).headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
+                .formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/design").permitAll())
+                .logout(logout -> logout.logoutSuccessUrl("/logout").permitAll())
                 .build();
 
 
