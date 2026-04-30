@@ -72,16 +72,24 @@ public class DesignTacoController {
     }
 
     @PostMapping
-    public String processTaco(@Valid Taco taco, Errors error, @ModelAttribute TacoOrder tacoOrder) {
+    public String processTaco(
+            @Valid @ModelAttribute("taco") Taco taco,
+            Errors errors,
+            @ModelAttribute("tacoOrder") TacoOrder tacoOrder) {
 
-        if(error.hasErrors()){
-            log.info(String.valueOf(error));
+        if (errors.hasErrors()) {
+            System.out.println("========== VALIDATION ERRORS ==========");
+
+            errors.getAllErrors().forEach(error -> {
+                System.out.println("Object error: " + error);
+            });
+
+
             return "design";
-
         }
 
         tacoOrder.addTaco(taco);
-        log.info("Taco has been added");
+
 
         return "redirect:/orders/current";
     }
