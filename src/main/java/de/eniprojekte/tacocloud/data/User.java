@@ -1,9 +1,6 @@
 package de.eniprojekte.tacocloud.data;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.jspecify.annotations.Nullable;
 import org.springframework.context.annotation.Primary;
@@ -16,7 +13,8 @@ import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor(access = AccessLevel.PUBLIC,force = true)
+@Table(name = "users")
+@NoArgsConstructor(access = AccessLevel.PROTECTED,force = true)
 @RequiredArgsConstructor
 public class User implements UserDetails {
 
@@ -26,14 +24,14 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String username;
-    private String password;
-    private String fullname;
-    private String street;
-    private String zip;
-    private String city;
-    private String state;
-    private String phoneNumber;
+    private final String username;
+    private final String password;
+    private final String fullname;
+    private final String street;
+    private final String zip;
+    private final String city;
+    private final String state;
+    private final String phoneNumber;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

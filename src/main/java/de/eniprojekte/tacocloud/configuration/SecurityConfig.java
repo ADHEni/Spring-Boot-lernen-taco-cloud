@@ -2,19 +2,18 @@ package de.eniprojekte.tacocloud.configuration;
 
 import de.eniprojekte.tacocloud.data.User;
 import de.eniprojekte.tacocloud.interfaces.UserRepository;
+import org.springframework.boot.security.autoconfigure.web.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
+
 
 @Configuration
 public class SecurityConfig {
@@ -35,6 +34,21 @@ public class SecurityConfig {
             }
             throw new UsernameNotFoundException("User " + username +  " not found!");
         };
+
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        return http.authorizeHttpRequests(auth ->
+                auth.requestMatchers("/design","/orders")
+                        .access(new WebExpressionAuthorizationManager("hasRole('USER')"))
+                        .requestMatchers("/","/**","/h2-console/login.do")
+                        .access(new WebExpressionAuthorizationManager("permitAll()"))
+                        ).csrf(csrf -> csrf
+                .ignoringRequestMatchers(PathRequest.toH2Console())).headers(headers -> headers.frameOptions(frame -> frame.sameOrigin())).formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/design").permitAll())
+                .build();
+
 
     }
 
