@@ -1,27 +1,28 @@
 package de.eniprojekte.tacocloud.data;
 
-import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.domain.Persistable;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.*;
+
+
+
 
 @Data
-@Table("INGREDIENT")
-public class Ingredient implements Persistable<String> {
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED,force = true)
+@Table(name="INGREDIENT")
+public class Ingredient {
 
     @Id
-    @Column("ID")
+    @Column(name = "ID")
     private final String id;
-    @Column("INGREDIENT_NAME")
+    @Column(name = "INGREDIENT_NAME")
     private final String name;
-    @Column("INGREDIENT_TYPE")
+    @Column(name = "INGREDIENT_TYPE")
     private final Type type;
-
-    @Override
-    public boolean isNew() {
-        return true;
-    }
 
     public enum Type{
 

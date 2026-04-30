@@ -10,8 +10,8 @@
     <a href="/design">Noch einen Taco machen!</a>
         <div th:each="taco : ${tacoOrder.tacos}">
             <p th:text="${taco.name}">Taco Names</p>
-            <div th:each="ingredientRef : ${taco.ingredients}">
-                <span th:text="${ingredientRef.ingredient}">Ingredient Name</span>
+            <div th:each="ingredient : ${taco.ingredients}">
+                <span th:text="${ingredient.name}">Ingredient Name</span>
             </div>
         </div></br>
 
