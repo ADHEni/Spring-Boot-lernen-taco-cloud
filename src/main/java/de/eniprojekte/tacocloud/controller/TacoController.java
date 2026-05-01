@@ -4,6 +4,8 @@ import de.eniprojekte.tacocloud.data.Taco;
 import de.eniprojekte.tacocloud.interfaces.TacoRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -32,9 +34,15 @@ public class TacoController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Taco> tacoById (@PathVariable long id) {
+    public ResponseEntity<Taco> tacoById(@PathVariable long id) {
 
-        return tacoRepository.findById(id);
+        Optional<Taco> taco = tacoRepository.findById(id);
+
+        if(taco.isPresent()) {
+            return ResponseEntity.ok(taco.get());
+        }
+
+        return ResponseEntity.notFound().build();
 
 
     }
