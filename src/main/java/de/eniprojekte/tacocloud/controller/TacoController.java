@@ -47,6 +47,15 @@ public class TacoController {
 
     }
 
+    @PostMapping(consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Taco createTaco(@RequestBody Taco taco) {
+
+        return tacoRepository.save(taco);
+
+
+    }
+
 
 
 
