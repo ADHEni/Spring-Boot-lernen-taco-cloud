@@ -19,3 +19,19 @@ spring:
 taco:
   order:
     pageSize: 20
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tacocloud
+    username: testuser
+    password: test
+    driver-class-name: org.postgresql.Driver
+
+  h2:
+    console:
+      enabled: false

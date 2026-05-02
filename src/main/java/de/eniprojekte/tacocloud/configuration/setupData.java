@@ -22,13 +22,6 @@ public class setupData {
                                          PasswordEncoder passwordEncoder, TacoRepository tacoRepository) {
         return args -> {
 
-
-            if(ingredientRepository.count() > 0){
-
-                System.out.println("Datensatz schon vorhanden");
-                return;
-            }
-
             Ingredient flourTortilla = new Ingredient(
                     "FLTO", "Flour Tortilla", Type.WRAP);
             Ingredient cornTortilla = new Ingredient(
@@ -49,16 +42,30 @@ public class setupData {
                     "SLSA", "Salsa", Type.SAUCE);
             Ingredient sourCream = new Ingredient(
                     "SRCR", "Sour Cream", Type.SAUCE);
-            ingredientRepository.save(flourTortilla);
-            ingredientRepository.save(cornTortilla);
-            ingredientRepository.save(groundBeef);
-            ingredientRepository.save(carnitas);
-            ingredientRepository.save(tomatoes);
-            ingredientRepository.save(lettuce);
-            ingredientRepository.save(cheddar);
-            ingredientRepository.save(jack);
-            ingredientRepository.save(salsa);
-            ingredientRepository.save(sourCream);
+
+            if(ingredientRepository.count() > 0){
+
+                System.out.println("Datensatz schon vorhanden");
+
+            }else{
+
+                ingredientRepository.save(flourTortilla);
+                ingredientRepository.save(cornTortilla);
+                ingredientRepository.save(groundBeef);
+                ingredientRepository.save(carnitas);
+                ingredientRepository.save(tomatoes);
+                ingredientRepository.save(lettuce);
+                ingredientRepository.save(cheddar);
+                ingredientRepository.save(jack);
+                ingredientRepository.save(salsa);
+                ingredientRepository.save(sourCream);
+            }
+
+            if(tacoRepository.count() > 0){
+
+                return;
+
+            }
 
             Taco taco1 = new Taco();
             taco1.setName("Bravius Maximus");
