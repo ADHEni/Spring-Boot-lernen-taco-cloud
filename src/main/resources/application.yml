@@ -1,4 +1,10 @@
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:9000/oauth2/jwks
+
   application:
     name: taco-cloud
 
@@ -19,6 +25,7 @@ spring:
 taco:
   order:
     pageSize: 20
+
 
 ---
 spring:

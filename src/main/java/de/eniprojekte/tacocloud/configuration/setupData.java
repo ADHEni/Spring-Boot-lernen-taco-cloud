@@ -3,6 +3,7 @@ package de.eniprojekte.tacocloud.configuration;
 import de.eniprojekte.tacocloud.data.Ingredient;
 import de.eniprojekte.tacocloud.data.Ingredient.Type;
 import de.eniprojekte.tacocloud.data.Taco;
+import de.eniprojekte.tacocloud.data.User;
 import de.eniprojekte.tacocloud.interfaces.IngredientRepository;
 import de.eniprojekte.tacocloud.interfaces.TacoRepository;
 import de.eniprojekte.tacocloud.interfaces.UserRepository;
@@ -76,6 +77,12 @@ public class setupData {
             taco2.setName("Banana Maximus");
             taco2.setIngredients(Arrays.asList(flourTortilla, cornTortilla, jack));
             tacoRepository.save(taco2);
+
+            if(userRepository.count() > 0){
+
+                return;
+            }
+            userRepository.save(new User("Enitimes",passwordEncoder.encode("test"),"EniK","sss","sss","sss","222","12332","ROLE_ADMIN"));
 
         };
 

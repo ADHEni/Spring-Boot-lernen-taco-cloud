@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "users")
-@NoArgsConstructor(access = AccessLevel.PROTECTED,force = true)
+@NoArgsConstructor(access = AccessLevel.PUBLIC,force = true)
 @RequiredArgsConstructor
 public class User implements UserDetails {
 
@@ -32,10 +32,11 @@ public class User implements UserDetails {
     private final String city;
     private final String state;
     private final String phoneNumber;
+    private final String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority(role));
     }
 
     @Override

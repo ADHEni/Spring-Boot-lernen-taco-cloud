@@ -17,7 +17,7 @@ public class RegistrationForum {
 
     public User toUser(PasswordEncoder encoder){
 
-        return new User(username,encoder.encode(password),fullname,street,city,state,zip,phone);
+        return new User(username,encoder.encode(password),fullname,street,city,state,zip,phone,"ROLE_USER");
 
     }
 
