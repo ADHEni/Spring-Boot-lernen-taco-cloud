@@ -1,5 +1,6 @@
 package de.eniprojekte.tacocloud.controller;
 
+import de.eniprojekte.tacocloud.data.Ingredient;
 import de.eniprojekte.tacocloud.data.Taco;
 import de.eniprojekte.tacocloud.interfaces.TacoRepository;
 import org.springframework.data.domain.PageRequest;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
 
@@ -15,12 +17,13 @@ import java.util.Optional;
 @CrossOrigin(origins = "localhost:8080")
 public class TacoController {
 
+    private final RestTemplate restTemplate;
     private TacoRepository tacoRepository;
 
-    public TacoController(TacoRepository tacoRepo) {
+    public TacoController(TacoRepository tacoRepo, RestTemplate restTemplate) {
 
         this.tacoRepository = tacoRepo;
-
+        this.restTemplate = restTemplate;
     }
 
 
@@ -55,6 +58,7 @@ public class TacoController {
 
 
     }
+
 
 
 
